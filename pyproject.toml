@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "onlineshop"
+version = "1.0"
+description = "Pet project"
+authors = ["LedxDelivery"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.104.1"
+sqlalchemy = "^2.0.23"
+uvicorn = {extras = ["standart"], version = "^0.24.0.post1"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

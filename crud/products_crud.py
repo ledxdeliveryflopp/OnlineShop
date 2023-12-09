@@ -1,3 +1,5 @@
+from typing import List
+
 from sqlalchemy.orm import Session
 from models.products_model import Product
 from schemas.products_schemas import ProductCreateSchemas
@@ -11,7 +13,7 @@ def get_product_by_title(db: Session, title: str):
     return db.query(Product).filter(Product.title == title).first()
 
 
-def create_product(db: Session, product: ProductCreateSchemas, tag_id: int):
+def create_product(db: Session, product: ProductCreateSchemas, tag_id: List[int]):
     db_product = Product(**product.model_dump(), tags_id=tag_id)
     db.add(db_product)
     db.commit()

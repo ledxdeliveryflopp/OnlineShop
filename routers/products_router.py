@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, List
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from database.database import engine, SessionLocal
@@ -26,13 +26,13 @@ def get_db():
 
 
 @router.get("/list/",  response_model=list[ProductSchemas])
-def get_products(limit: int = 100, db: Session = Depends(get_db)):
+def get_products(limit: int | None = None, db: Session = Depends(get_db)):
     products = get_product(db, limit=limit)
     return products
 
 
 @router.get("/list/admin/",  response_model=list[ProductAdminSchemas])
-def get_products_admin(limit: int = 100, db: Session = Depends(get_db)):
+def get_products_admin(limit: int | None = None, db: Session = Depends(get_db)):
     products = get_product(db, limit=limit)
     return products
 

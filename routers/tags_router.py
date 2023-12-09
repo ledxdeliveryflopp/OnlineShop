@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database.database import engine, SessionLocal
-from models import tags_model
-from schemas.tags_schemas import TagAdminSchemas, TagSchemas, TagCreateSchemas
+from models import products_model
+from schemas.tags_schemas import TagBaseSchemas, TagSchemas, TagCreateSchemas
 from crud.tags_crud import get_tag_by_title, get_tag, create_Tag
 
-tags_model.Base.metadata.create_all(bind=engine)
+products_model.Base.metadata.create_all(bind=engine)
 
 router = APIRouter(
     prefix="/tags",
@@ -29,13 +29,7 @@ def get_tags(limit: int = 100, db: Session = Depends(get_db)):
     return tags
 
 
-@router.get("/list/admin/",  response_model=list[TagAdminSchemas])
-def get_tags_admin(limit: int = 100, db: Session = Depends(get_db)):
-    tags = get_tag(db, limit=limit)
-    return tags
-
-
-@router.post("/create/", response_model=TagSchemas)
+@router.post("/create/", response_model=TagBaseSchemas)
 def add_tags(tag: TagCreateSchemas, db: Session = Depends(get_db)):
     tags = get_tag_by_title(db, title=tag.title)
     if tags:

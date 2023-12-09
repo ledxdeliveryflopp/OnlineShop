@@ -1,10 +1,20 @@
-from uuid import UUID
+from typing import List
 from pydantic import BaseModel
 
 
-class TagAdminSchemas(BaseModel):
-    """Схема тега для админа"""
-    # id: UUID
+class ProductSchemas(BaseModel):
+    """Схема товара"""
+
+    id: int
+    title: str
+
+    class Config:
+        orm_mode = True
+
+
+class TagBaseSchemas(BaseModel):
+    """Схема тега"""
+
     id: int
     title: str
 
@@ -16,11 +26,11 @@ class TagSchemas(BaseModel):
     """Схема тега"""
 
     title: str
+    products: List[ProductSchemas] = []
 
     class Config:
         orm_mode = True
 
 
-class TagCreateSchemas(TagSchemas):
-    """Схема тега для создания"""
-    pass
+class TagCreateSchemas(BaseModel):
+    title: str

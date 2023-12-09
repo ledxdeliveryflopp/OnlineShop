@@ -1,11 +1,18 @@
-from uuid import UUID
 from pydantic import BaseModel
-from schemas.tags_schemas import TagSchemas
+
+
+class TagSchemas(BaseModel):
+    """Схема тега"""
+
+    title: str
+
+    class Config:
+        orm_mode = True
 
 
 class ProductAdminSchemas(BaseModel):
     """Схема товара для админа"""
-    # id: UUID
+
     id: int
     title: str
     description: str

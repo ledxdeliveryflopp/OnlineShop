@@ -1,7 +1,5 @@
-from typing import List
 from sqlalchemy import Column, String, Numeric, ForeignKey, Integer
-from sqlalchemy.dialects.postgresql import ARRAY, INTEGER
-from sqlalchemy.orm import relationship, Mapped, mapped_column
+from sqlalchemy.orm import relationship
 from database.database import Base
 
 

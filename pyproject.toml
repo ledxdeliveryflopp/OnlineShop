@@ -11,6 +11,7 @@ fastapi = "^0.104.1"
 sqlalchemy = "^2.0.23"
 uvicorn = {extras = ["standart"], version = "^0.24.0.post1"}
 psycopg2 = "^2.9.9"
+starlette-admin = "^0.12.2"
 
 
 [build-system]

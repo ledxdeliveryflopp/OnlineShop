@@ -10,8 +10,6 @@ products_model.Base.metadata.create_all(bind=engine)
 router = APIRouter(
     prefix="/tags",
     tags=["tags"],
-    # dependencies=[Depends(get_token_header)],
-    # responses={404: {"description": "Not found"}},
 )
 
 
@@ -26,6 +24,8 @@ def get_db():
 @router.get("/list/",  response_model=list[TagSchemas])
 def get_tags(limit: int = 100, db: Session = Depends(get_db)):
     tags = get_tag(db, limit=limit)
+    if not tags:
+        raise HTTPException(status_code=404, detail="Тегов нет")
     return tags
 
 

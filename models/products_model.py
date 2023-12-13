@@ -1,5 +1,6 @@
+from typing import List
 from sqlalchemy import Column, String, Numeric, ForeignKey, Integer
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, Mapped
 from database.database import Base
 
 
@@ -10,9 +11,9 @@ class Product(Base):
     title = Column(String(60), unique=True, index=True)
     description = Column(String, nullable=False)
     price = Column(Numeric, nullable=False)
-    tags_id = Column(Integer, ForeignKey("tags.id"))
 
-    tags = relationship("Tag", back_populates="products")
+    tags_id = Column(Integer, ForeignKey("tags.id"))
+    tags: Mapped[List["Tag"]] = relationship(back_populates="products")
 
 
 class Tag(Base):
@@ -21,4 +22,4 @@ class Tag(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(60), unique=True, index=True)
 
-    products = relationship("Product", back_populates="tags")
+    products: Mapped[List["Product"]] = relationship(back_populates="tags")

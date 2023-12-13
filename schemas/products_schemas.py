@@ -10,30 +10,7 @@ class TagSchemas(BaseModel):
         orm_mode = True
 
 
-class ProductAdminSchemas(BaseModel):
-    """Схема товара для админа"""
-
-    id: int
-    title: str
-    description: str
-    price: int
-
-    class Config:
-        orm_mode = True
-
-
-class ProductBaseSchemas(BaseModel):
-    """Базавая схема товара"""
-
-    title: str
-    description: str
-    price: int
-
-    class Config:
-        orm_mode = True
-
-
-class ProductSchemas(BaseModel):
+class ProductResponseSchemas(BaseModel):
     """Схема товара"""
 
     title: str
@@ -45,6 +22,19 @@ class ProductSchemas(BaseModel):
         orm_mode = True
 
 
+class ProductBaseSchemas(BaseModel):
+    """Базавая схема товара"""
+
+    title: str
+    description: str
+    price: int
+    tags_id: int
+
+    class Config:
+        orm_mode = True
+
+
 class ProductCreateSchemas(ProductBaseSchemas):
     """Схема товара для создания"""
+
     pass

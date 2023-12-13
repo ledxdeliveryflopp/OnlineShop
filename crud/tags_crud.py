@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-
 from models.products_model import Tag
 from schemas.tags_schemas import TagCreateSchemas
 

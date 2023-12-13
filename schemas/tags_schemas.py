@@ -15,16 +15,16 @@ class ProductSchemas(BaseModel):
 class TagBaseSchemas(BaseModel):
     """Схема тега"""
 
-    id: int
     title: str
 
     class Config:
         orm_mode = True
 
 
-class TagSchemas(BaseModel):
-    """Схема тега"""
+class TagResponseSchemas(BaseModel):
+    """Схема тега для ответа"""
 
+    id: int
     title: str
     products: List[ProductSchemas] = []
 
@@ -32,5 +32,8 @@ class TagSchemas(BaseModel):
         orm_mode = True
 
 
-class TagCreateSchemas(BaseModel):
-    title: str
+class TagCreateSchemas(TagBaseSchemas):
+    """Схема тега для создания"""
+
+    pass
+

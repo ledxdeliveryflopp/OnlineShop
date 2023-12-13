@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database.database import engine, SessionLocal
 from models import products_model
-from schemas.tags_schemas import TagBaseSchemas, TagSchemas, TagCreateSchemas
+from schemas.tags_schemas import TagBaseSchemas, TagResponseSchemas, TagCreateSchemas
 from crud.tags_crud import get_tag_by_title, get_tag, create_Tag
 
 products_model.Base.metadata.create_all(bind=engine)
@@ -21,7 +21,7 @@ def get_db():
         db.close()
 
 
-@router.get("/list/",  response_model=list[TagSchemas])
+@router.get("/list/",  response_model=list[TagResponseSchemas])
 def get_tags(limit: int = 100, db: Session = Depends(get_db)):
     tags = get_tag(db, limit=limit)
     if not tags:
